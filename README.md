@@ -1,5 +1,4 @@
 # Physics-informed Temporal Alignment for Auto-regressive PDE Foundation Models
-![Pipeline](fig/pipeline.png)
 
 ## Requirements
 To run the experiments successfully, you need to prepare the envirment.
