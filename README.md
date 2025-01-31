@@ -1,9 +1,15 @@
-Codes for ICML 2025 Paper "Physics-informed Temporal Alignment for Auto-regressive PDE Foundation Models".
+# Physics-informed Temporal Alignment for Auto-regressive PDE Foundation Models
+![Pipeline](fig/pipeline.png)
 
 ## Requirements
 To run the experiments successfully, you need to prepare the envirment.
+- Conda
 ```
 conda env create -f environment.yaml
+```
+- Pip
+```
+pip install -r reqquirements.txt
 ```
 
 ## Training
@@ -21,3 +27,4 @@ python train_PITA_FNO.py --gpu 6 --train_paths ns2d_pdb_M1_eta1e-2_zeta1e-2 --te
 ```
 python train_MPP.py --gpu 1 --model_size Ti --train_paths burgers --test_paths burgers --ntrain_list 1000 --lr_method cycle --T_in 10 --T_ar 1 --lr 0.001
 ```
+
