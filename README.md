@@ -14,7 +14,7 @@ python train_PITA_DPOT.py --gpu 7 --epochs 500 --time_cut 3 --resume_path models
 - For FNO:
 ```
 python train_PITA_FNO.py --gpu 6 --train_paths ns2d_pdb_M1_eta1e-2_zeta1e-2 --test_paths ns2d_pdb_M1_eta1e-2_zeta1e-2 --ntrain_list 9000 --lr_method cycle 
-
+```
 
 - For MPP:
 
