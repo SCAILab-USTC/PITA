@@ -8,10 +8,10 @@ Official Pytorch implementation for our ICML2025 submission "Physics-informed Te
 
  The proposed framework integrates auto-regressive prediction and PDE discovery with self-supervised learning:
 
-- (1) The pretrained PDE model takes the initial temporal states $\left\{\boldsymbol{u}_t\right\}_{t=1}^{T_{in}}$ as input and predicts future states $\left\{\hat{\boldsymbol{u}}_t\right\}_{t=T_{in}+1}^{{T_{in}+T_{ar}}}$ as output in an auto-regressive manner;
+- (1) The pretrained PDE model takes the initial temporal states $\left\{\boldsymbol{u}_ t\right\}_ {t=1}^{T_ {in}}$ as input and predicts future states $\left\{\hat{\boldsymbol{u}}_ t\right\}_ {t=T_{in}+1}^{{T_{in}+T_{ar}}}$ as output in an auto-regressive manner;
 - (2) Data-driven PDE discovery is then performed on the compressed input sequence to infer the governing equations. 
 Temporal alignment is achieved by matching the discovered physical laws from predictions with those obtained from the ground truth sequence;
-- (3) The loss function consists of three parts, i.e., data loss $\mathcal{L}_{ {Data }}$, physics loss $\mathcal{L}_{{Phy}}$, and consistency loss $\mathcal{L}_{ {Con }}$, with an uncertainty-based strategy employed to adjust the weights dynamically.
+- (3) The loss function consists of three parts, i.e., data loss $\mathcal{L}_ { {Data }}$, physics loss $\mathcal{L}_ {{Phy}}$, and consistency loss $\mathcal{L}_ { {Con }}$, with an uncertainty-based strategy employed to adjust the weights dynamically.
 
 For any questions regarding our paper or this repository, please feel free to contact us at xxy1101@mail.ustc.edu.cn.
 ## Datasets
