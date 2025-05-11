@@ -13,6 +13,7 @@ Official Pytorch implementation for our ICML2025 submission "Physics-informed Te
 Temporal alignment is achieved by matching the discovered physical laws from predictions with those obtained from the ground truth sequence;
 - (3) The loss function consists of three parts, i.e., data loss $\mathcal{L}_{ {Data }}$, physics loss $\mathcal{L}_{{Phy}}$, and consistency loss $\mathcal{L}_{ {Con }}$, with an uncertainty-based strategy employed to adjust the weights dynamically.
 
+For any questions regarding our paper or this repository, please feel free to contact us at xxy1101@mail.ustc.edu.cn.
 ## Datasets
 
 All datasets are stored using hdf5 format, containing data field. Below is a table list of the datasets used in our paper.
