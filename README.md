@@ -72,7 +72,7 @@ If you're familiar with Conda, you can quickly set up the environment using:
 git clone https://github.com/SCAILab-USTC/PITA.git
 cd PITA
 conda env create -f environment.yaml
-conda activate pita
+conda activate PITA
 ```
 
 **Alternative: Pip**
