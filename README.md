@@ -2,7 +2,8 @@
 
 Official Pytorch implementation for our ICML2025 submission "Physics-informed Temporal Alignment for Auto-regressive PDE Foundation Models".
 
->   ![arXiv](https://img.shields.io/badge/arXiv-2505.10930-b31b1b.svg)
+>  [arXiv:2505.10930](http://arxiv.org/abs/2505.10930) &nbsp; ![arXiv](https://img.shields.io/badge/arXiv-2505.10930-b31b1b.svg)
+
 
 
 ![fig1](figs/pipeline_final.png "Work Folw of PITA.")
