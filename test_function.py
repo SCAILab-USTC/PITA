@@ -8,13 +8,13 @@ myloss = SimpleLpLoss(size_average=False)
 def evaluate_model(model, test_loaders, ntests, test_paths, ep, log_path, args, writer=None, save_tag=""):
     model.eval()
     test_l2_steps, test_l2_fulls = [], []
-
+    device = torch.device("cuda:{}".format(args.gpu))
     with torch.no_grad():
         for id, test_loader in enumerate(test_loaders):
             step_loss_total, full_loss_total = 0, 0
 
             for xx, yy, msk, _ in test_loader:
-                xx, yy, msk = xx.to(args.device), yy.to(args.device), msk.to(args.device)
+                xx, yy, msk = xx.to(device), yy.to(device), msk.to(device)
                 loss, t = 0, 0
                 xx_input = xx.clone()
 
