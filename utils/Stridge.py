@@ -185,33 +185,93 @@ def build_library(data: list, derivatives: list, descriptions: list, order: int 
 #             lib_poly_deri_descr.append(lib_poly_descr[i] + lib_deri_descr[j])
 
 #     return lib_poly_deri, lib_poly_deri_descr
-
-def U_all_compute(yy: torch.Tensor, device: str,
-                  upper_bound_x: float, upper_bound_y: float,
-                  upper_bound_t: float, lower_bound_t: float,
-                  lower_bound_x: float, lower_bound_y: float):
+def U_all_compute(
+    yy: torch.Tensor = torch.randn((20, 128, 128, 10, 3)),
+    device: str = "cuda:0",
+    upper_bound_x: float = 2.5,
+    upper_bound_y: float = 2.5,
+    upper_bound_t: float = 1.0,
+    lower_bound_x: float = -2.5,
+    lower_bound_y: float = -2.5,
+    lower_bound_t: float = 0.0,
+) -> tuple:
     """
-    Compute spatial and temporal derivatives of tensor yy.
+    Compute spatial and temporal derivatives for each channel of the 5D tensor `yy`.
+
+    Parameters:
+        yy (torch.Tensor): Input tensor of shape [B, X, Y, T, C].
+        device (str): Torch device identifier.
+        upper_bound_x (float): Maximum x-coordinate.
+        upper_bound_y (float): Maximum y-coordinate.
+        upper_bound_t (float): Maximum time.
+        lower_bound_x (float): Minimum x-coordinate.
+        lower_bound_y (float): Minimum y-coordinate.
+        lower_bound_t (float): Minimum time.
 
     Returns:
-        U_all (Tensor): Stacked array of field and derivatives.
-        U_t (Tensor): Time derivative tensor.
+        U_all (torch.Tensor): Stacked tensor of original `yy` and its first and second
+                              spatial derivatives: [yy, U_x, U_y, U_xy, U_xx, U_yy, U_yx].
+        U_t   (torch.Tensor): Concatenated temporal derivatives for all channels.
     """
-    _, nx, ny, nt, nc = yy.shape
-    dx = (upper_bound_x - lower_bound_x) / (nx - 1)
-    dy = (upper_bound_y - lower_bound_y) / (ny - 1)
-    dt = (upper_bound_t - lower_bound_t) / (nt - 1)
+    # Extract dimensions
+    _, size_x, size_y, size_t, num_channels = yy.shape
 
-    derivatives = []
-    for i in range(nc):
-        u = yy[..., i:i+1]
-        du_dx = torch.gradient(u, spacing=dx, dim=1)[0]
-        du_dy = torch.gradient(u, spacing=dy, dim=2)[0]
-        du_dt = torch.gradient(u, spacing=dt, dim=3)[0]
-        derivatives.append((du_dt, du_dx, du_dy))
-    U_t = torch.cat([d[0] for d in derivatives], dim=-1)
-    U_all = torch.stack([yy] + [d for tup in derivatives for d in tup[1:]], dim=0)
+    # Create coordinate grids
+    grid_x = torch.linspace(lower_bound_x, upper_bound_x, size_x, device=device)
+    grid_y = torch.linspace(lower_bound_y, upper_bound_y, size_y, device=device)
+    grid_t = torch.linspace(lower_bound_t, upper_bound_t, size_t, device=device)
+
+    # Grid spacings
+    dx = grid_x[1] - grid_x[0]
+    dy = grid_y[1] - grid_y[0]
+    dt = grid_t[1] - grid_t[0]
+
+    # Prepare containers
+    U_t_list = []
+    U_x_list = []
+    U_y_list = []
+    U_xy_list = []
+    U_xx_list = []
+    U_yy_list = []
+    U_yx_list = []
+
+    # Compute derivatives for each channel
+    for c in range(num_channels):
+        channel = yy[..., c:c+1]
+
+        # First-order derivatives
+        d_u_dx = torch.gradient(channel, spacing=dx, dim=1)[0]
+        d_u_dy = torch.gradient(channel, spacing=dy, dim=2)[0]
+        d_u_dt = torch.gradient(channel, spacing=dt, dim=3)[0]
+
+        # Second-order and cross derivatives
+        d2_u_dxx = torch.gradient(d_u_dx, spacing=dx, dim=1)[0]
+        d2_u_dyy = torch.gradient(d_u_dy, spacing=dy, dim=2)[0]
+        d2_u_dxy = torch.gradient(d_u_dx, spacing=dy, dim=2)[0]
+        d2_u_dyx = torch.gradient(d_u_dy, spacing=dx, dim=1)[0]
+
+        # Collect results
+        U_t_list.append(d_u_dt)
+        U_x_list.append(d_u_dx)
+        U_y_list.append(d_u_dy)
+        U_xy_list.append(d2_u_dxy)
+        U_xx_list.append(d2_u_dxx)
+        U_yy_list.append(d2_u_dyy)
+        U_yx_list.append(d2_u_dyx)
+
+    # Concatenate along channel dimension
+    U_t = torch.cat(U_t_list, dim=-1)
+
+    # Stack original yy and spatial derivatives
+    U_all = torch.stack(
+        [yy] +
+        [torch.cat(lst, dim=-1) for lst in
+         [U_x_list, U_y_list, U_xy_list, U_xx_list, U_yy_list, U_yx_list]],
+        dim=0
+    )
+
     return U_all, U_t
+
 
 
 
