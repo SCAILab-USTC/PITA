@@ -5,6 +5,9 @@ Official Pytorch implementation for our ICML2025 submission "Physics-informed Te
 >  [arXiv:2505.10930](http://arxiv.org/abs/2505.10930) &nbsp; ![arXiv](https://img.shields.io/badge/arXiv-2505.10930-b31b1b.svg)
 
 
+<p align="center" style="font-size:small; color:gray;">
+I would like to express my sincere gratitude to my friend Xiaoxiang Wu, who is currently pursuing her Master's degree, for her generous help in recording the introduction video.
+</p>
 
 ![fig1](figs/pipeline_final.png "Work Folw of PITA.")
 
