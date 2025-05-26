@@ -211,7 +211,6 @@ This repository contains code for training and evaluating the **PITA** framework
 
 We gratefully acknowledge the DPOT project for providing the data preprocessing pipeline utilized in our study (https://github.com/HaoZhongkai/DPOT/blob/main/data_generation/preprocess.py). Furthermore, we sincerely thank the authors of the AutomaticWeightedLoss repository (https://github.com/Mikoto10032/AutomaticWeightedLoss/tree/master) for their implementation of the uncertainty-based automatic loss weighting strategy, which was adapted for our experiments. Their contributions and commitment to open-source research have been instrumental to our work.
 
-<p align="center" style="font-size:small; color:gray;">
-I would like to express my sincere gratitude to my friend Xiaoxiang Wu, who is currently pursuing her Master's degree, for her generous help in recording the introduction video.
-</p>
+I would like to express my sincere gratitude to my dear friend Xiaoxiang Wu, who is currently pursuing her Master's degree, for her generous help in recording the introduction video.
+
 
