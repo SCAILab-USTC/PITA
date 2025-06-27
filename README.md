@@ -5,7 +5,7 @@ Official Pytorch implementation for our ICML2025 submission "Physics-informed Te
 > ![arXiv](https://img.shields.io/badge/arXiv-2505.10930-b31b1b.svg)  
 > **[Introduction Video](https://drive.google.com/file/d/1NXiaAj7s-86K_GgwWNPulsDpfYhJPMqd/view?usp=sharing)**
 > 
-> **[Poster](https://drive.google.com/file/d/1kwfr_86v0EFbnaIHAJLCIBqjh-ta8C-T/view?usp=sharing)**
+> **[Poster](https://drive.google.com/file/d/1ZtK2Xr9aLTEPEryqFHuoj0Hb9njY4mOV/view?usp=sharing)**
 
 
 ![fig1](figs/pipeline_final.png "Work Folw of PITA.")
